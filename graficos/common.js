@@ -1,12 +1,11 @@
 const getCSS = (variavel) => {
-    const bodyStyles = getComputedStyle(document.body)
-    return bodyStyles.getPropertyValue(variavel)
+    return getComputedStyle(document.body).getPropertyValue(variavel)
 }
 
 const tickConfig = {
-    family: getCSS('--font'),
+    color: getCSS('--primary-color'),
     size: 16,
-    color: getCSS('--primary-color')
+    family: getCSS('--font')
 }
 
 function criarGrafico(data, layout) {
@@ -20,4 +19,12 @@ function criarGrafico(data, layout) {
     Plotly.newPlot(grafico, data, layout, config)
 }
 
-export {getCSS, tickConfig, criarGrafico}
+function incluirTexto(texto) {
+    const container = document.getElementById('graficos-container')
+    const paragrafo = document.createElement('p')
+    paragrafo.classList.add('graficos-container__texto')
+    paragrafo.innerHTML = texto
+    container.appendChild(paragrafo)
+}
+
+export { getCSS, tickConfig, criarGrafico, incluirTexto }
